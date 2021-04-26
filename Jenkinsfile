@@ -15,7 +15,7 @@ pipeline {
     stage('Deploy') {
       agent any
       steps {
-	    sh 'docker remove ${DOCKER_CONTAINER} -f'
+	    sh 'docker rm ${DOCKER_CONTAINER} -f'
         sh 'docker run -d --rm -it --network net-global --name ${DOCKER_CONTAINER} -p 8000:80 ${DOCKER_IMAGE}'
         //clean to save disk
         sh "docker image rm ${DOCKER_IMAGE} -f"
