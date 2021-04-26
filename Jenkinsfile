@@ -5,25 +5,7 @@ pipeline {
     DOCKER_IMAGE = "pixiu_store_image"
     DOCKER_TAG="${ENVIRONMENT}-${GIT_COMMIT}"
   }
-  parameters {
-        gitParameter name: 'BRANCH_TAG', 
-                     type: 'PT_BRANCH_TAG',
-                     defaultValue: 'master'
-  }
   stages {
-	stage('Checkout') {
-		agent any
-		steps {
-			checkout([$class: 'GitSCM', 
-					  branches: [[name: "${params.BRANCH_TAG}"]], 
-					  doGenerateSubmoduleConfigurations: false, 
-					  extensions: [], 
-					  gitTool: 'Default', 
-					  submoduleCfg: [], 
-					  userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']]
-					])
-		}
-	}
     stage('Build') {
       agent any
       steps {
